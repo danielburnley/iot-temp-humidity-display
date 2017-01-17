@@ -1,0 +1,19 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "http://iot.pintsize.it/api/get/test",
+                cache: false
+            })
+                .done(function (html) {
+                    $("#test").attr('src', "data:image/png;base64," + html);
+                });
+        });
+    </script>
+</head>
+<body>
+<img src="" id="test"/>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="iotApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Temperature/Humidity Sensor</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="static/iot.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/home.css"/>
+</head>
+
+<body ng-cloak ng-controller="HomeController" class="container">
+
+<div id="graph-container" class="row">
+    <div ng-hide="rolling_temperature.length === 0" class="col-md-6" id="temperature-graph"></div>
+    <div ng-hide="rolling_humidity.length === 0" class="col-md-6" id="humidity-graph"></div>
+</div>
+<div ng-show="overview" id="overview" class="row">
+    <div id="current-temp" class="col-md-3">
+        <h3>Current Temperature</h3>
+        <h4>{{ overview.latest_temperature }} &deg;C</h4>
+    </div>
+    <div id="avg-temp" class="col-md-3">
+        <h3>Average Temperature<br/><small>Over the last hour</small></h3>
+        <h4>{{ overview.average_temperature }} &deg;C</h4>
+    </div>
+    <div id="current-humidity" class="col-md-3">
+        <h3>Current Humidity</h3>
+        <h4>{{ overview.latest_humidity }} %</h4>
+    </div>
+    <div id="avg-humidity" class="col-md-3">
+        <h3>Average Humidity<br /><small>Over the last hour</small></h3>
+        <h4>{{ overview.average_humidity }} %</h4>
+    </div>
+</div>
+<button ng-hide="show_raw_data" ng-click="show_raw_data = true">Show raw data</button>
+<button ng-show="show_raw_data" ng-click="show_raw_data = false">Hide raw data</button>
+<div ng-hide="raw_data.length === 0 || !show_raw_data" id="data-container" class="row">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Time</th>
+            <th>Temperature (&deg;C)</th>
+            <th>Humidity</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="data in raw_data">
+            <td>{{ data.time }}</td>
+            <td>{{ data.temp }}</td>
+            <td>{{ data.hum }}</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

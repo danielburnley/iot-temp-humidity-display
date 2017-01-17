@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="iotApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Temperature/Humidity Sensor</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="{{ url_for('static', filename='iot.js') }}"></script>
+</head>
+
+<body ng-controller="HomeController">
+
+<p ng-if="img === ''">Loading...</p>
+<div ng-if="img != ''">
+    <img src="{[ img ]}"/>
+</div>
+</body>
+</html>
